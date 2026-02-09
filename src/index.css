@@ -1,0 +1,201 @@
+/* ============================================
+   Serenity Design System
+   A relaxing, nature-inspired color palette
+   ============================================ */
+
+:root {
+  /* --- Primary Palette: Sage & Forest --- */
+  --sage-50: #f6f7f4;
+  --sage-100: #e8ebe3;
+  --sage-200: #d4dbc9;
+  --sage-300: #b5c1a4;
+  --sage-400: #96a87e;
+  --sage-500: #7a8f63;
+  --sage-600: #5f724c;
+  --sage-700: #4b5a3d;
+  --sage-800: #3e4933;
+  --sage-900: #353f2d;
+
+  /* --- Accent Palette: Ocean Mist --- */
+  --ocean-50: #f0f7f7;
+  --ocean-100: #daedef;
+  --ocean-200: #b8dce0;
+  --ocean-300: #88c3ca;
+  --ocean-400: #5fa8b2;
+  --ocean-500: #438d97;
+  --ocean-600: #3b7380;
+  --ocean-700: #355e69;
+  --ocean-800: #324f58;
+  --ocean-900: #2d434b;
+
+  /* --- Warm Palette: Sand & Cream --- */
+  --sand-50: #fdfbf7;
+  --sand-100: #f9f4ea;
+  --sand-200: #f2e6d0;
+  --sand-300: #e8d3ae;
+  --sand-400: #dcbb88;
+  --sand-500: #d2a56a;
+  --sand-600: #c48e55;
+  --sand-700: #a37348;
+  --sand-800: #845d40;
+  --sand-900: #6c4d37;
+
+  /* --- Lavender Accent --- */
+  --lavender-50: #f8f6fb;
+  --lavender-100: #eeebf5;
+  --lavender-200: #dfd9ed;
+  --lavender-300: #c8bcdf;
+  --lavender-400: #ad98cd;
+  --lavender-500: #9678bc;
+  --lavender-600: #8361aa;
+  --lavender-700: #6f5091;
+  --lavender-800: #5d4378;
+  --lavender-900: #4e3963;
+
+  /* --- Rose Accent --- */
+  --rose-50: #fdf5f5;
+  --rose-100: #fce8e8;
+  --rose-200: #f9d4d4;
+  --rose-300: #f3b3b3;
+  --rose-400: #ea8585;
+  --rose-500: #dd5e5e;
+  --rose-600: #c94242;
+  --rose-700: #a93535;
+  --rose-800: #8c2f2f;
+  --rose-900: #752c2c;
+
+  /* --- Neutrals --- */
+  --neutral-50: #fafaf9;
+  --neutral-100: #f5f5f3;
+  --neutral-200: #e8e7e4;
+  --neutral-300: #d6d4cf;
+  --neutral-400: #b8b5ae;
+  --neutral-500: #9e9a91;
+  --neutral-600: #8a8579;
+  --neutral-700: #736e64;
+  --neutral-800: #605c54;
+  --neutral-900: #504d47;
+  --neutral-950: #2b2924;
+
+  /* --- Semantic Colors --- */
+  --bg-primary: var(--sand-50);
+  --bg-secondary: #ffffff;
+  --bg-tertiary: var(--sage-50);
+  --bg-accent: var(--ocean-50);
+
+  --text-primary: var(--neutral-950);
+  --text-secondary: var(--neutral-700);
+  --text-tertiary: var(--neutral-500);
+  --text-inverse: #ffffff;
+
+  --border-light: var(--neutral-200);
+  --border-default: var(--neutral-300);
+
+  --accent-primary: var(--sage-500);
+  --accent-secondary: var(--ocean-500);
+  --accent-warm: var(--sand-500);
+  --accent-soft: var(--lavender-500);
+
+  /* --- Typography --- */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+
+  /* --- Spacing --- */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* --- Border Radius --- */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* --- Shadows --- */
+  --shadow-sm: 0 1px 2px rgba(53, 63, 45, 0.04), 0 1px 3px rgba(53, 63, 45, 0.06);
+  --shadow-md: 0 4px 6px rgba(53, 63, 45, 0.04), 0 2px 8px rgba(53, 63, 45, 0.06);
+  --shadow-lg: 0 10px 25px rgba(53, 63, 45, 0.06), 0 4px 12px rgba(53, 63, 45, 0.04);
+  --shadow-xl: 0 20px 40px rgba(53, 63, 45, 0.08), 0 8px 20px rgba(53, 63, 45, 0.04);
+
+  /* --- Transitions --- */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================
+   Global Reset & Base Styles
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--accent-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--ocean-600);
+}
+
+::selection {
+  background-color: var(--sage-200);
+  color: var(--sage-900);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--neutral-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neutral-300);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral-400);
+}
