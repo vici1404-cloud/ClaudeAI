@@ -28,13 +28,19 @@ RevenueCat, server-side affiliate resolution, ads last.
 **Exit:** app boots to a styled empty dashboard; `supabase db reset` gives a
 seeded, tested database; CI green.
 
-## M2 — Auth & profile
+## M2 — Auth & profile ✅
 
-Email + Google + Apple sign-in, session persistence, age gate, profile row
-creation, delete-account function (GDPR), Settings screen shell + dark mode
-toggle (dark is default).
+Magic-link email + Google sign-in (PKCE), session persisted in encrypted
+secure storage, auth routing guard, age gate (onboarding), DB-trigger profile +
+free-entitlement provisioning, GDPR delete-account Edge Function, Settings
+screen (sign out, delete account, theme row).
 
-**Exit:** full auth lifecycle tested on iOS + Android builds.
+Apple Sign-In deferred by decision; the provider layer is Apple-ready (one
+union entry + one label). **Must add before iOS App Store submission** —
+Guideline 4.8 requires it alongside any third-party social login.
+
+**Exit:** full auth lifecycle; email flow testable in Expo Go, Google requires
+a dev-client build + configured OAuth.
 
 ## M3 — Bottle inventory
 

@@ -45,7 +45,10 @@ jobs:
         run: |
           psql "$PGURL" -v ON_ERROR_STOP=1 -c "
             create schema auth;
-            create table auth.users (id uuid primary key);
+            create table auth.users (
+              id uuid primary key,
+              raw_user_meta_data jsonb not null default '{}'
+            );
             create function auth.uid() returns uuid
               language sql stable as 'select null::uuid';
           "

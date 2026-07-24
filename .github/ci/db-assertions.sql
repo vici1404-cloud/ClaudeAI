@@ -39,7 +39,13 @@ begin
   -- syrup can make a Daiquiri (missing = 0) and is exactly one bottle
   -- away from a Margarita after adding tequila (missing = triple sec).
   insert into auth.users (id) values (test_user);
-  insert into profiles (id, display_name) values (test_user, 'ci');
+  -- The on_auth_user_created trigger should have auto-created the profile.
+  if not exists (select 1 from profiles where id = test_user) then
+    raise exception 'profile was not auto-created by the auth trigger';
+  end if;
+  if not exists (select 1 from entitlements where user_id = test_user and tier = 'free') then
+    raise exception 'free entitlement was not auto-created by the auth trigger';
+  end if;
   insert into inventory_items (user_id, ingredient_id)
   select test_user, id from ingredients
   where slug in ('white-rum', 'lime-juice', 'simple-syrup', 'tequila-blanco');

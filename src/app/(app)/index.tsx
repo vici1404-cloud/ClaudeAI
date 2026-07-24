@@ -1,5 +1,7 @@
-import { View } from 'react-native';
+import { Link } from 'expo-router';
+import { Pressable, View } from 'react-native';
 
+import { useProfile } from '@/features/auth';
 import { AppText, GlassPanel, Screen } from '@/shared/ui';
 
 function greetingForHour(hour: number): string {
@@ -16,18 +18,31 @@ function greetingForHour(hour: number): string {
  */
 export default function HomeScreen() {
   const greeting = greetingForHour(new Date().getHours());
+  const { data: profile } = useProfile();
+  const name = profile?.displayName;
 
   return (
     <Screen>
       <View className="gap-6">
-        <View className="gap-1 pt-2">
-          <AppText variant="label" tone="gold">
-            MixAI
-          </AppText>
-          <AppText variant="display">{greeting}</AppText>
-          <AppText variant="body" tone="secondary">
-            Your personal AI bartender.
-          </AppText>
+        <View className="flex-row items-start justify-between pt-2">
+          <View className="flex-1 gap-1">
+            <AppText variant="label" tone="gold">
+              MixAI
+            </AppText>
+            <AppText variant="display">{name ? `${greeting}, ${name}` : greeting}</AppText>
+            <AppText variant="body" tone="secondary">
+              Your personal AI bartender.
+            </AppText>
+          </View>
+          <Link href="/(app)/settings" asChild>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Settings"
+              className="h-11 w-11 items-center justify-center rounded-full border border-glass-border bg-surface"
+            >
+              <AppText variant="heading">⚙︎</AppText>
+            </Pressable>
+          </Link>
         </View>
 
         <GlassPanel>
