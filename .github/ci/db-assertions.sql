@@ -94,5 +94,11 @@ begin
     raise exception 'margarita should be one bottle away (missing = 1), got missing = %', n;
   end if;
 
+  -- Hardening migration: signup function must not be executable by public.
+  if has_function_privilege('anon', 'public.handle_new_user()', 'execute')
+     or has_function_privilege('authenticated', 'public.handle_new_user()', 'execute') then
+    raise exception 'handle_new_user should not be executable by anon/authenticated';
+  end if;
+
   raise notice 'all database assertions passed';
 end $$;
