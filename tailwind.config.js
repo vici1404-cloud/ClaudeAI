@@ -4,6 +4,9 @@ const { palette } = require('./src/shared/theme/palette');
 module.exports = {
   content: ['./src/**/*.{ts,tsx}'],
   presets: [require('nativewind/preset')],
+  // App is dark-first and forces the dark scheme; 'class' lets us set it
+  // manually. 'media' (NativeWind default) throws on any manual set.
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
