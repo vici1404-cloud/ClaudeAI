@@ -1,0 +1,51 @@
+name: Deploy web preview
+
+# Builds the Expo web export and publishes it to GitHub Pages so the app
+# can be reviewed in any browser (no localhost, no Expo Go). The Supabase
+# anon key is public by design (RLS guards the data), so it is safe to
+# bake into a client build here.
+
+on:
+  push:
+    branches: [claude/mixai-startup-architecture-2ay3zk]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    env:
+      EXPO_PUBLIC_SUPABASE_URL: https://oehlqsilcqjdvowetyfw.supabase.co
+      EXPO_PUBLIC_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9laGxxc2lsY3FqZHZvd2V0eWZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ4OTI5MTQsImV4cCI6MjEwMDQ2ODkxNH0.AInyJO0FkhKVEyE1KKJuk6HxM6ySKVGr4iY5RSfzLHQ
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Export web build
+        run: npx expo export --platform web
+      - name: SPA fallback + disable Jekyll
+        run: |
+          # GitHub Pages runs Jekyll, which ignores _expo/ (leading underscore).
+          touch dist/.nojekyll
+          # Client-side routing: unknown paths should load the app shell.
+          cp dist/index.html dist/404.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deploy
+        uses: actions/deploy-pages@v4

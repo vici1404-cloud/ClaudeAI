@@ -1,0 +1,27 @@
+# Supabase local development configuration.
+# Cloud project settings (auth providers, secrets) are managed in the
+# dashboard / via CI, not in this file.
+
+project_id = "mixai"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 17
+
+[studio]
+enabled = true
+port = 54323
+
+[auth]
+enabled = true
+site_url = "mixai://"
+
+[storage]
+enabled = true
+file_size_limit = "10MiB"
